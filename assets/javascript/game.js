@@ -1,4 +1,4 @@
-var listofWords = ["istillworkingonthisgame", "developer", "coding"];
+var listofWords = ["coding","is","not","easy"];
 var computerRandIndex = Math.floor(Math.random() *  listofWords.length);
 var computerPickWord = listofWords[computerRandIndex];
 var numberofGuessCount = 9;
@@ -8,9 +8,11 @@ var boardGame = [];
 var wins = 0;
 var losses = 0;
 var userInput = "";
+var displayBoardDiv = document.getElementById("output");
+
 
 for( i=0; i < computerPickWord.length; i++){
-    boardGame[i] = "_";
+    boardGame[i] = "*";
 }   
 
 document.getElementById("output").textContent=boardGame.join(" ");
@@ -34,19 +36,3 @@ document.onkeyup = function(event){
 
 
 
-// var displayBoardDiv = document.getElementById("output");
-// displayBoardDiv.textContent = userInput;
-
-// if(computerPickWord.indexOf(userInput)> -1 ) {
-//     boardGame[computerPickWord.indexOf(userInput)]=userInput;
-//     displayBoard.textContent= boardGame.join(""); 
-//     rightGuessLetter = rightGuessLetter + userInput;
-
-//     if(computerPickWord=== rightGuessLetter){
-//         wins++;
-
-
-// document.onkeyup = function(event){
-//     userInput = event.key.toLowerCase();
-//   alert(userInput);
-//  } 
