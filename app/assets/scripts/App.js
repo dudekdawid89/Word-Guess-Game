@@ -1,7 +1,10 @@
 import '../styles/styles.css'
-import WelcomeScreen from "./modules/WelcomeScreen"
+import Game from "./modules/Game"
 
-new WelcomeScreen()
+
+new Game()
+
+
 
 
 if(module.hot){
