@@ -8,7 +8,7 @@ class Game {
         this.keyboardsletters = "abcdefghijklmnopqrstuvwxyz"
         this.keyboard = document.querySelector('.game__keyboard')
         this.wrongGuessLimitDisplay = document.querySelector('.game__wrongGuessLimit')
-        // this.currentWord
+        this.currentWord
         this.resetGameButton = document.querySelector('.game__reset')
         this.wordDisplay = document.querySelector('.game__word')
         this.wrongGuessDisplay = document.querySelector('.game__wrongGuesses')
@@ -49,18 +49,26 @@ class Game {
 
 
         board(){
-            this.currentWord = this.answer.split('').map(letter => (this.guessedWords.indexOf(letter) >= 0 ? letter : "_")).join('')
+            this.currentWord = this.answer.split('').map(letter => (this.guessedWords.indexOf(letter) >= 0 ? letter : "*")).join('')
             this.wordDisplay.innerHTML = this.currentWord 
             this.wrongGuessDisplay.innerHTML = this.mistakes
+        
+           
         }
 
 
         handleGuess(letter){
             if(this.guessedWords.indexOf(letter) === -1){
                 this.guessedWords.push(letter)
+
+                
             }
 
             document.getElementById(`${letter}`).setAttribute('disabled', true)
+            console.log('this.answer :', this.answer);
+            console.log('this.mistakes :', this.mistakes);
+            console.log('this.guessedWords :', this.guessedWords);
+            console.log('this.currentWord :', this.currentWord);
            
             if(this.answer.indexOf(letter) >= 0){
                 this.board()
@@ -70,14 +78,14 @@ class Game {
                 this.mistakes = this.mistakes + 1
                 this.wrongGuessDisplay.innerHTML = this.mistakes
                 this.lostCheck()
+          
 
             }
         }
 
 
         wonCheck(){
-
-            this.currentWord === this.answer ? this.keyboard.innerHTML = "you win" : null
+            this.currentWord === this.answer ? this.keyboard.innerHTML = "you won" : null
         }
 
 
@@ -87,7 +95,7 @@ class Game {
                 this.wordDisplay.innerHTML = 'The answer was: ' + this.answer
             }
         }
-
+        
 
         resetGame(){
             this.mistakes = 0
@@ -95,6 +103,10 @@ class Game {
             this.wordGenerator()
             this.keyboardGenerator()
             this.board()
+            console.log('this.answer :', this.answer);
+            console.log('this.mistakes :', this.mistakes);
+            console.log('this.guessedWords :', this.guessedWords);
+            console.log('this.currentWord :', this.currentWord);
         }
     }
 
