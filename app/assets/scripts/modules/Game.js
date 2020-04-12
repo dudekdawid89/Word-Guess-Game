@@ -5,6 +5,7 @@ class Game {
         this.wrongGuessLimit = 10
         this.mistakes = 0
         this.guessedWords = []
+        this.usedWords = []
         this.keyboardsletters = "abcdefghijklmnopqrstuvwxyz"
         this.keyboard = document.querySelector('.game__keyboard')
         this.wrongGuessLimitDisplay = document.querySelector('.game__wrongGuessLimit')
@@ -29,7 +30,18 @@ class Game {
  
         wordGenerator(){
             this.answer = this.wordsArray[Math.floor(Math.random() * this.wordsArray.length)]
-            console.log('answer :', this.answer);
+            // this.usedWords.push(this.answer)
+            // console.log('this.answerWG :', this.answer);
+            // console.log('this.usedWords :', this.usedWords);
+            // this.usedWordsFiltered = this.usedWords.filter((item, index) => { return this.usedWords.indexOf(item) === index})
+            // console.log('this.usedWordsFiltered :', this.usedWordsFiltered);
+            
+
+            if(this.answer.length >= 8){
+                this.wordDisplay.style.fontSize = "1.5rem"
+            }else{
+                this.wordDisplay.style.fontSize = "2rem"
+            }
         }
 
 
@@ -60,15 +72,9 @@ class Game {
         handleGuess(letter){
             if(this.guessedWords.indexOf(letter) === -1){
                 this.guessedWords.push(letter)
-
-                
             }
 
             document.getElementById(`${letter}`).setAttribute('disabled', true)
-            console.log('this.answer :', this.answer);
-            console.log('this.mistakes :', this.mistakes);
-            console.log('this.guessedWords :', this.guessedWords);
-            console.log('this.currentWord :', this.currentWord);
            
             if(this.answer.indexOf(letter) >= 0){
                 this.board()
@@ -78,21 +84,23 @@ class Game {
                 this.mistakes = this.mistakes + 1
                 this.wrongGuessDisplay.innerHTML = this.mistakes
                 this.lostCheck()
-          
-
             }
         }
 
 
         wonCheck(){
-            this.currentWord === this.answer ? this.keyboard.innerHTML = "you won" : null
+            if(this.currentWord === this.answer){
+                this.keyboard.innerHTML = `<div class="game__won">YOU WON!</div>`
+                this.keyboard.classList.add('game__won--animate')
+            }       
         }
 
 
         lostCheck(){
             if(this.mistakes === this.wrongGuessLimit){
-                this.keyboard.innerHTML = "you lost"
-                this.wordDisplay.innerHTML = 'The answer was: ' + this.answer
+                this.keyboard.innerHTML = `<div class="game__lost">YOU LOST!</div>`
+                this.keyboard.classList.add('game__lost--animate')
+                this.wordDisplay.innerHTML = `<div class="game__answer"><span class="game__answer-title">The answer was: </span>${this.answer}</div>`
             }
         }
         
@@ -103,10 +111,8 @@ class Game {
             this.wordGenerator()
             this.keyboardGenerator()
             this.board()
-            console.log('this.answer :', this.answer);
-            console.log('this.mistakes :', this.mistakes);
-            console.log('this.guessedWords :', this.guessedWords);
-            console.log('this.currentWord :', this.currentWord);
+            this.keyboard.classList.remove('game__won--animate')
+            this.keyboard.classList.remove('game__lost--animate')
         }
     }
 
