@@ -1,0 +1,133 @@
+.game {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 1.4rem;
+    margin-top: 2.5rem;
+
+    &__buttonLetter{
+        min-width: 3rem;
+        padding: .2rem 0;
+        font-size: 1.7rem;
+        margin: 10px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        text-transform: uppercase;
+        box-shadow: 1px 1px 5px gray;
+    }
+
+    &__wrongGuesses{
+        color: red;
+        font-weight: 600;
+    }
+
+    &__title{
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1rem;
+        margin-right: -.1rem;
+        font-weight: 800;
+        font-size: 1.8rem;
+        color:white
+    }
+
+    &__title2{
+        font-style: italic;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        color: orange
+
+    }
+
+    &__buttonLetter:disabled{
+        opacity: 0;
+        transition: all .5s ease-out;
+        cursor: default;
+    }
+
+    &__wrongGuessesContainer{
+        margin-bottom: 50px;
+    }
+
+    &__word{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;  
+        font-size: 2rem;
+        letter-spacing: 20px;
+        margin-right: -20px;
+        text-transform: uppercase;
+        font-weight: 800;
+        color: orange;
+        margin-bottom: 3rem;
+        min-height: 3rem;
+    }
+
+    &__won{
+        font-size: 2rem;
+        color: orange;
+        
+        &--animate{
+            transform: scale(1.5);
+            transition: all .1s ease-in-out;
+        }
+    }
+
+    &__keyboard{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin: 1.5rem;
+    }
+
+    &__button-container{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px;
+    }
+
+    &__answer{
+        color: green;
+        margin: 3px 20px;
+        text-align: center;
+        letter-spacing: normal;
+        display: block;
+    }
+
+    &__answer-title{
+        font-size: 1rem;
+        color: white;
+        display: block;
+    }
+
+    &__reset{
+        background-color: orange;
+        font-size: 2rem;
+        width: 250px;
+        height: 50px;
+        margin: 10px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        text-transform: uppercase;
+        box-shadow: 1px 1px 1px black;
+    }
+
+    &__lost{
+        font-size: 2rem;
+        color: red;
+        font-weight: 900;
+
+        &--animate{
+            transform: scale(1.5);
+            transition: all .1s ease-in-out;
+        }
+    }
+}

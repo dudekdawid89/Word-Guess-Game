@@ -13,7 +13,7 @@ class Game {
         this.resetGameButton = document.querySelector('.game__reset')
         this.wordDisplay = document.querySelector('.game__word')
         this.wrongGuessDisplay = document.querySelector('.game__wrongGuesses')
-        this.wordGenerator()
+        this.wordCheck()
         this.keyboardGenerator()
         this.board()
         this.events()
@@ -28,14 +28,9 @@ class Game {
         }
 
  
-        wordGenerator(){
-            this.answer = this.wordsArray[Math.floor(Math.random() * this.wordsArray.length)]
-            // this.usedWords.push(this.answer)
-            // console.log('this.answerWG :', this.answer);
-            // console.log('this.usedWords :', this.usedWords);
-            // this.usedWordsFiltered = this.usedWords.filter((item, index) => { return this.usedWords.indexOf(item) === index})
-            // console.log('this.usedWordsFiltered :', this.usedWordsFiltered);
-            
+        wordCheck(){
+            this.wordGenerator()
+            this.usedWords.push(this.answer)
 
             if(this.answer.length >= 8){
                 this.wordDisplay.style.fontSize = "1.5rem"
@@ -43,7 +38,19 @@ class Game {
                 this.wordDisplay.style.fontSize = "2rem"
             }
         }
+        wordGenerator(){
+            this.answer = this.wordsArray[Math.floor(Math.random() * this.wordsArray.length)]
+        }
 
+        countInArray(array, what) {
+            let count = 0;
+            for (var i = 0; i < array.length; i++) {
+                if (array[i] === what) {
+                    count++;
+                }
+            }
+            return count;
+        }
 
         keyboardGenerator(){
             let buttons = this.keyboardsletters.split('').map(letter => 
@@ -64,8 +71,6 @@ class Game {
             this.currentWord = this.answer.split('').map(letter => (this.guessedWords.indexOf(letter) >= 0 ? letter : "*")).join('')
             this.wordDisplay.innerHTML = this.currentWord 
             this.wrongGuessDisplay.innerHTML = this.mistakes
-        
-           
         }
 
 
@@ -108,7 +113,11 @@ class Game {
         resetGame(){
             this.mistakes = 0
             this.guessedWords = []
-            this.wordGenerator()
+            this.wordCheck()
+            this.dontRepet = this.countInArray(this.usedWords, this.answer)
+            if(this.dontRepet > 1){
+                this.wordGenerator()
+            }
             this.keyboardGenerator()
             this.board()
             this.keyboard.classList.remove('game__won--animate')
